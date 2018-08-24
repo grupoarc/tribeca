@@ -169,7 +169,8 @@ const liveTradingSetup = () : SimulationClasses => {
     app.use(express.static(path.join(__dirname, "admin")));
     
     const webport = config.GetNumber("WebClientListenPort");
-    http_server.listen(webport, () => mainLog.info('Listening to admins on *:', webport));
+    const webhost = config.GetString("WebClientListenHost");
+    http_server.listen(webport, webhost, () => mainLog.info('Listening to admins on *:', webport));
     
     const getExchange = (): Models.Exchange => {
         const ex = config.GetString("EXCHANGE").toLowerCase();
